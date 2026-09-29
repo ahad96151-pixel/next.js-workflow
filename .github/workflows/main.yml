@@ -2,37 +2,31 @@
 
  on:
   push:
-    branches:
-      - main
-  pull_request:
-    branches:
-      - main
+    branches: [main]
 
  jobs:
   build:
     runs-on: ubuntu-latest
 
     steps:
-      # 1. Repository checkout
-      - name: Checkout code
-        uses: actions/checkout@v4
+      - name: Checkout Repository
+        uses:  actions/checkout@v4.2.2
 
-      # 2. Setup Node.js + npm cache
-      - name: Setup Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: 22.x
-          cache: 'npm'
+      - name: Setup Node js
+        uses: actions/setup-node@v4.2.2
+        
+        node-version:  22.x
+         cache: 'npm'
 
-      # 3. Install dependencies
+
       - name: Install dependencies
         run: npm install
 
-      # 4. Build Next.js application
+   
       - name: Build application
         run: npm run build
 
-      # 5. Upload build as Artifact
+ 
       - name: Upload build artifact
         uses: actions/upload-artifact@v4
         with:
